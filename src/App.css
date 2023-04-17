@@ -43,19 +43,30 @@ h4 {
 .cons-container {
   background-color: #fff;
   box-shadow: var(--box-shadow);
-  padding: 40px;
-  display: flex;
+  padding: 20px;
+  display:flex;
   justify-content: space-around;
-  margin: 50px 0;
+  margin: 40px auto;
+  width: 600px;
+  padding-right: 10px;
+  
 }
 
 .cons-container > div {
-  flex: 1;
+  flex: 20;
   text-align: center;
+  padding: 20px;
+  padding-right: 30px;
 }
 
 .cons-container > div:first-of-type {
   border-right: 1px solid #dedede;
+}
+.cons-container > div:nth-of-type(2) {
+    border-right: 1px solid #dedede;
+}
+.cons-container > div:last-of-type {
+    border-left: 1px solid #dedede;
 }
 
 .money {
@@ -64,12 +75,8 @@ h4 {
   margin: 5px 0;
 }
 
-.money.plus {
+.TotalCosts {
   color: #2ecc71;
-}
-
-.money.minus {
-  color: #c0392b;
 }
 
 label {
