@@ -1,9 +1,9 @@
 import React from 'react'
 
-const header = () => {
+const Header = () => {
   return (
-    <div>Car Fuel Expenses</div>
+    <h2>Car Fuel Expenses</h2>
   )
 }
 
-export default header
+export default Header
