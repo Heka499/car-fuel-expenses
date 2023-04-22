@@ -4,11 +4,12 @@ import { GlobalContext } from '../context/GlobalState';
 
 const CarsList = () => {
   const { refuels } = useContext(GlobalContext)
-  const cars = refuels.map(refuels => refuels.car)
+  const carSet = new Set(refuels.map(refuel => refuel.car));
+  const uniqueCars = [...carSet];
 
   return (
     <>
-      {cars.map(car => (
+      {uniqueCars.map(car => (
         <CarTotalCost key={car} car={car} />
       ))}
     </>
