@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { GlobalContext } from '../context/GlobalState'
+import './TotalCost.css'
 
 const TotalCost = () => {
   const { refuels } = useContext(GlobalContext);
@@ -31,29 +32,31 @@ const TotalCost = () => {
     .toFixed(2);
     
   return (
-    <>
-        <div>TotalCost</div>
-        <div>
-            <h4>Total Sum:</h4>
-            <p>{totalPrice} €</p>
+    <div className="total-cost-container">
+        <h2 className="total-cost-title">Total Cost</h2>
+        <div className="total-cost-info">
+            <div className="total-cost-info-item">
+                <h4>Total Sum:</h4>
+                <p>{totalPrice} €</p>
+            </div>
+            <div className="total-cost-info-item">
+                <h4>Total Consumption:</h4>
+                <p>{totalLiters} Liters</p>
+            </div>
+            <div className="total-cost-info-item">
+                <h4>Total Distance</h4>
+                <p>{totalDistance} km</p>
+            </div>
+            <div className="total-cost-info-item">
+                <h4>Average Expenses</h4>
+                <p>{averageExpenses} € per 100km</p>
+            </div>
+            <div className="total-cost-info-item">
+                <h4>Average Consumption</h4>
+                <p>{averageConsumption} Liters per 100km</p>
+            </div>       
         </div>
-        <div>
-            <h4>Total Consumption:</h4>
-            <p>{totalLiters} Liters</p>
-        </div>
-        <div>
-            <h4>Total Distance</h4>
-            <p>{totalDistance} km</p>
-        </div>
-        <div>
-            <h4>Average Expenses</h4>
-            <p>{averageExpenses} € per 100km</p>
-        </div>
-        <div>
-            <h4>Average Consumption</h4>
-            <p>{averageConsumption} Liters per 100km</p>
-        </div>       
-    </>
+    </div>
   )
 }
 
