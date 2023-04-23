@@ -7,6 +7,9 @@ const RefuelingForm = () => {
   const [price, setPrice] = useState('');
   const [distance, setDistance] = useState('');
   const [car, setCar] = useState('');
+  const [isElectric, setIsElectric] = useState(false);
+  const [kWh, setkWh] = useState('');
+  const [priceElec, setPriceElec] = useState('');
 
   const { addRefuel } = useContext(GlobalContext);
 
@@ -18,10 +21,21 @@ const RefuelingForm = () => {
         liters,
         price,
         distance,
-        car
+        car,
+        kWh,
+        priceElec,
+        isElectric
     }
 
-    addRefuel(newRefueling);
+    addRefuel(newRefueling)
+
+    setCar('');
+    setDistance('');
+    setIsElectric('');
+    setLiters('');
+    setPrice('');
+    setPriceElec('');
+    setkWh('');
   }
 
   return (
@@ -29,13 +43,34 @@ const RefuelingForm = () => {
       <h4>Add New Refuel</h4>
       <form className='refueling-form' onSubmit={handleAddRefueling}>
         <div className='form-group'>
-          <label htmlFor='liters'>Liters:</label>
-          <input className='form-control' id='liters' type='number' value={liters} onChange={(event) => setLiters(event.target.value)} required />
+          <label htmlFor='isElectric'>
+            <input type='checkbox' checked={isElectric} onChange={(event) => setIsElectric(event.target.checked)} />
+            Electric Car
+          </label>
         </div>
-        <div className='form-group'>
-          <label htmlFor='price'>Price €:</label>
-          <input className='form-control' id='price' type='number' value={price} onChange={(event) => setPrice(event.target.value)} required />
-        </div>
+        {isElectric ? (
+          <>
+          <div className='form-group'>
+              <label htmlFor='kWh'>kWh:</label>
+              <input className='form-control' id='kWh' type='number' value={kWh} onChange={(event) => setkWh(event.target.value)} required />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='priceElec'>Electricity price €/kWh:</label>
+              <input className='form-control' id='priceElec' type='number' value={priceElec} onChange={(event) => setPriceElec(event.target.value)} required />
+            </div>
+          </>
+        ) : (
+          <>
+            <div className='form-group'>
+              <label htmlFor='liters'>Liters:</label>
+              <input className='form-control' id='liters' type='number' value={liters} onChange={(event) => setLiters(event.target.value)} required />
+            </div>
+            <div className='form-group'>
+              <label htmlFor='price'>Price €:</label>
+              <input className='form-control' id='price' type='number' value={price} onChange={(event) => setPrice(event.target.value)} required />
+            </div>
+          </>
+        )}
         <div className='form-group'>
           <label htmlFor='distance'>Distance (km):</label>
           <input className='form-control' id='distance' type='number' value={distance} onChange={(event) => setDistance(event.target.value)} required />
