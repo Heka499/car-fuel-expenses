@@ -11,6 +11,12 @@ const TotalCost = ({ car }) => {
   const price = filteredRefuels.map(refuel => Number(refuel.price));
   const distance = filteredRefuels.map(refuel => Number(refuel.distance));
 
+  const kWhs = refuels.map(refuels => Number(refuels.kWhs))
+  const priceElec = refuels.map(refuels => Number(refuels.priceElec))
+  const distanceElec = refuels.map(refuels => Number(refuels.distance))
+
+  const isElectric = refuels.map(refuels => (refuels.isElectric))
+
   const totalLiters = liters
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
@@ -26,6 +32,19 @@ const TotalCost = ({ car }) => {
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
+  const totalkWhs = kWhs
+    .filter(item => item > 0)
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const totalPriceElec = priceElec
+    .filter(item => item > 0)
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const avgPriceElec = Number(totalPriceElec) / priceElec.length;
+  const totalPriceElecAll = Number(totalkWhs) * Number(avgPriceElec)
+
   const averageExpenses = ((totalPrice / totalDistance) * 100)
     .toFixed(2);
 
@@ -37,6 +56,29 @@ const TotalCost = ({ car }) => {
       <div className='total-cost-container'>
         <h4 className='total-cost-title'>{car}</h4>
           <div className='total-cost-info'>
+            {isElectric ? (
+              <>
+                <div className='total-cost-info-item'>
+                  <h4>Total Sum:</h4>
+                  <p>{totalPriceElecAll} €</p>
+                </div>
+                <div className='total-cost-info-item'>
+                  <h4>Total Charging:</h4>
+                  <p>{totalkWhs} kWh</p>
+                </div>
+              </>
+            ) : (
+              <>
+              <div className='total-cost-info-item'>
+                <h4>Total Sum:</h4>
+                <p>{totalPrice} €</p>
+              </div>
+              <div className='total-cost-info-item'>
+                <h4>Total Consumption:</h4>
+                <p>{totalLiters} Liters</p>
+              </div>
+              </>
+            )}
             <div className='total-cost-info-item'>
               <h4>Total Sum:</h4>
               <p>{totalPrice} €</p>

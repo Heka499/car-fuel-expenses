@@ -9,6 +9,10 @@ const TotalCost = () => {
   const price = refuels.map(refuels => Number(refuels.price))
   const distance = refuels.map(refuels => Number(refuels.distance))
 
+  const kWhs = refuels.map(refuels => Number(refuels.kWhs))
+  const priceElec = refuels.map(refuels => Number(refuels.priceElec))
+  const distanceElec = refuels.map(refuels => Number(refuels.distance))
+
 
   const totalLiters = liters
     .filter(item => item > 0)
@@ -25,7 +29,21 @@ const TotalCost = () => {
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
-  const averageExpenses = ((totalPrice / totalDistance) * 100)
+  const totalkWhs = kWhs
+    .filter(item => item > 0)
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const totalPriceElec = priceElec
+    .filter(item => item > 0)
+    .reduce((acc, item) => (acc += item), 0)
+    .toFixed(2);
+
+  const avgPriceElec = totalPriceElec / priceElec.length;
+
+  const totalPriceAll = totalPrice + (totalkWhs * avgPriceElec)
+
+  const averageExpenses = ((totalPriceAll / totalDistance) * 100)
     .toFixed(2);
 
   const averageConsumption = ((totalLiters / totalDistance) * 100)
@@ -37,7 +55,7 @@ const TotalCost = () => {
         <div className="total-cost-info">
             <div className="total-cost-info-item">
                 <h4>Total Sum:</h4>
-                <p>{totalPrice} €</p>
+                <p>{totalPriceAll} €</p>
             </div>
             <div className="total-cost-info-item">
                 <h4>Total Consumption:</h4>
