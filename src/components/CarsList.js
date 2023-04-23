@@ -9,9 +9,14 @@ const CarsList = () => {
 
   return (
     <>
-      {uniqueCars.map(car => (
-        <CarTotalCost key={car} car={car} />
-      ))}
+      <h3>Costs Per Car</h3>
+      <ul className='list'>
+        <li>
+          {uniqueCars.map(car => (
+            <CarTotalCost key={car} car={car} />
+          ))}
+        </li>
+      </ul>
     </>
   );
 };
