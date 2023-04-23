@@ -8,7 +8,7 @@ const RefuelingHistory = () => {
   return (
     <>
       <h4>Refueling History</h4>
-      <table className='list'>
+      <table className='list-history'>
         <thead>
           <tr>
             <th className='list__header'>Car</th>
