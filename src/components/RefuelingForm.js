@@ -54,8 +54,8 @@ const RefuelingForm = () => {
       <h4>Add New Refuel</h4>
       <form className='refueling-form' onSubmit={handleAddRefueling}>
         <div className='form-group'>
-          <label htmlFor='isElectric'>
-            <input type='checkbox' checked={isElectric} onChange={(event) => setIsElectric(event.target.checked)} />
+          <label htmlFor='isElectric' className='checkbox-label'>
+            <input className='checkbox-input' type='checkbox' checked={isElectric} onChange={(event) => setIsElectric(event.target.checked)} />
             Electric Car
           </label>
         </div>
