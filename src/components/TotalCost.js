@@ -27,9 +27,14 @@ const TotalCost = () => {
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
-  const averagElecCost = Number(totalElecCost) / priceElec.length
+  const averagElecCost = (Number(totalElecCost) / priceElec.length).toFixed(2);
   
-  const totalCostElec = Number(totalElecConsumption) * averagElecCost 
+  const totalCostElec = charges
+  .map(charge => Number(charge.priceElec) * Number(charge.kWh))
+  .filter(cost => cost > 0)
+  .reduce((acc, cost) => (acc += cost), 0)
+  .toFixed(2);
+
 
   const averageExpensesElec = ((totalCostElec / totalDistanceElec) * 100)
       .toFixed(2);
