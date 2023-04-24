@@ -11,7 +11,7 @@ const RefuelingForm = () => {
   const [kWh, setkWh] = useState('');
   const [priceElec, setPriceElec] = useState('');
 
-  const { addRefuel } = useContext(GlobalContext);
+  const { addRefuel, addCharge } = useContext(GlobalContext);
 
   const handleAddRefueling = (event) => {
     event.preventDefault();
@@ -22,13 +22,24 @@ const RefuelingForm = () => {
         price,
         distance,
         car,
-        kWh,
-        priceElec,
         isElectric
     }
 
-    addRefuel(newRefueling)
+    const newCharge = {
+        id: Math.floor(Math.random() * 1000000),
+        kWh,
+        priceElec,
+        isElectric,
+        distance,
+        car
+    }
 
+    {isElectric ? (
+      addCharge(newCharge)
+    ) : (
+      addRefuel(newRefueling)
+    )}
+    
     setCar('');
     setDistance('');
     setIsElectric('');
