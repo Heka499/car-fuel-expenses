@@ -1,21 +1,27 @@
 import React from 'react';
-import { Header } from './components/header';
-import { Consumption } from './components/consumption'
-import { TransactionList } from './components/TransactionList';
-import { AddTransaction } from './components/AddTransaction';
+import Header from './components/Header';
+import RefuelingForm from './components/RefuelingForm';
+import RefuelingHistory from './components/RefuelingHistory';
+import TotalCost from './components/TotalCost';
+import CarsList from './components/CarsList';
 
 import './App.css';
+import { GlobalProvider } from './context/GlobalState';
+
 
 function App() {
   return (
-    <div className="App">
+    <GlobalProvider>
+    <div>
       <Header />
-      <div className="container">
-          <Consumption />
-          <TransactionList />
-          <AddTransaction />
+      <div className='container'>
+        <RefuelingForm />
+        <TotalCost />
+        <CarsList />
+        <RefuelingHistory />
       </div>
     </div>
+    </GlobalProvider>
   );
 }
 
