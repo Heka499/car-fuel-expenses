@@ -1,11 +1,14 @@
 import React, { useContext } from 'react';
 import CarTotalCost from './CarTotalCost';
 import { GlobalContext } from '../context/GlobalState';
+import ElectricCarTotalCost from './ElectricCarTotalCost'
 
 const CarsList = () => {
-  const { refuels } = useContext(GlobalContext)
+  const { refuels, charges } = useContext(GlobalContext)
   const carSet = new Set(refuels.map(refuel => refuel.car));
   const uniqueCars = [...carSet];
+  const eCarSet = new Set(charges.map(charges => charges.car))
+  const uniqueECars = [...eCarSet]
 
   return (
     <>
@@ -14,6 +17,11 @@ const CarsList = () => {
         <li>
           {uniqueCars.map(car => (
             <CarTotalCost key={car} car={car} />
+          ))}
+        </li>
+        <li>
+          {uniqueECars.map(car => (
+            <ElectricCarTotalCost key={car} car={car} />
           ))}
         </li>
       </ul>

@@ -3,7 +3,7 @@ import { GlobalContext } from '../context/GlobalState';
 import './RefuelingHistory.css';
 
 const RefuelingHistory = () => {
-  const { refuels } = useContext(GlobalContext)
+  const { refuels, charges } = useContext(GlobalContext)
 
   return (
     <>
@@ -24,6 +24,27 @@ const RefuelingHistory = () => {
               <td>{refuel.liters}</td>
               <td>{refuel.price}</td>
               <td>{refuel.distance}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <h4>Charging History</h4>
+      <table className='list-history'>
+        <thead>
+          <tr>
+            <th className='list__header'>Car</th>
+            <th className='list__header'>kWh</th>
+            <th className='list__header'>Electricity Price (€/kWh)</th>
+            <th className='list__header'>Distance (km)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {charges.map((charge, index) => (
+            <tr key={index}>
+              <td>{charge.car}</td>
+              <td>{charge.kWh}</td>
+              <td>{charge.priceElec}</td>
+              <td>{charge.distance}</td>
             </tr>
           ))}
         </tbody>

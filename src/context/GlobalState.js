@@ -3,7 +3,8 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-    refuels: []
+    refuels: [],
+    charges: [],
 }
 
 // Create context
@@ -28,12 +29,20 @@ export const GlobalProvider = ({ children }) => {
         });
     }
 
+    function addCharge(charge) {
+        dispatch({
+            type: 'ADD_CHARGE',
+            payload: charge
+        });
+    }
 
-
+    
     return (<GlobalContext.Provider value={{
         refuels: state.refuels,
+        charges: state.charges,
         deleteRefuel,
-        addRefuel
+        addRefuel,
+        addCharge
     }}>
         {children}
     </GlobalContext.Provider>);
