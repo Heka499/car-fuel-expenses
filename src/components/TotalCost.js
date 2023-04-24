@@ -8,11 +8,11 @@ const TotalCost = () => {
   const liters = refuels.map(refuels => Number(refuels.liters))
   const price = refuels.map(refuels => Number(refuels.price))
   const distanceGas = refuels.map(refuels => Number(refuels.distance))
-
+  
   const kWh = charges.map(charges => Number(charges.kWh))
   const priceElec = charges.map(charges => Number(charges.priceElec))
   const distanceElec = charges.map(charges => Number(charges.distance))
-
+  
   const totalElecCost = priceElec
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
@@ -21,47 +21,57 @@ const TotalCost = () => {
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
-
+  
   const totalDistanceElec = distanceElec
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
-
-  const averagElecCost = (Number(totalElecCost) / priceElec.length).toFixed(2);
   
+  const averagElecCost = charges.length > 0 && priceElec.length > 0
+    ? (Number(totalElecCost) / priceElec.length).toFixed(2)
+    : '0.00';
+
+  const averageConsumptionElec = charges.length > 0 && totalDistanceElec > 0
+    ? ((totalElecConsumption / totalDistanceElec) * 100).toFixed(2)
+    : '0.00';
+
   const totalCostElec = charges
-  .map(charge => Number(charge.priceElec) * Number(charge.kWh))
-  .filter(cost => cost > 0)
-  .reduce((acc, cost) => (acc += cost), 0)
-  .toFixed(2);
+    .map(charge => Number(charge.priceElec) * Number(charge.kWh))
+    .filter(cost => cost > 0)
+    .reduce((acc, cost) => (acc += cost), 0)
+    .toFixed(2);
 
-
-  const averageExpensesElec = ((totalCostElec / totalDistanceElec) * 100)
-      .toFixed(2);
-  const averageConsumptionElec = ((totalElecConsumption / totalDistanceElec) * 100)
-      .toFixed(2);
-
+  const averageExpensesElec = charges.length > 0 && totalDistanceElec > 0
+    ? ((totalCostElec / totalDistanceElec) * 100).toFixed(2)
+    : '0.00';
+  
   const totalLiters = liters
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
   
-    const totalPrice = price
+  const totalPrice = price
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
-    
+  
   const totalDistanceGas = distanceGas
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
-
-  const averageGasPrice = Number(totalPrice) / Number(totalLiters)
-
-  const averageExpensesGas = ((totalPrice / totalDistanceGas) * 100)
-    .toFixed(2);
-  const averageConsumptionGas = ((totalLiters / totalDistanceGas) * 100)
-    .toFixed(2);
+  
+  const averageGasPrice = refuels.length > 0 && totalLiters > 0
+    ? (Number(totalPrice) / Number(totalLiters)).toFixed(2)
+    : '0.00';
+  
+  const averageExpensesGas = refuels.length > 0 && totalDistanceGas > 0
+    ? ((totalPrice / totalDistanceGas) * 100).toFixed(2)
+    : '0.00';
+  
+  const averageConsumptionGas = refuels.length > 0 && totalDistanceGas > 0
+    ? ((totalLiters / totalDistanceGas) * 100).toFixed(2)
+    : '0.00';
+  
 
     
   return (
