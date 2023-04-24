@@ -5,9 +5,11 @@ import './TotalCost.css'
 const TotalCost = ({ car }) => {
   const { refuels } = useContext(GlobalContext);
 
-  const liters = refuels.map(refuels => Number(refuels.liters))
-  const price = refuels.map(refuels => Number(refuels.price))
-  const distanceGas = refuels.map(refuels => Number(refuels.distance))
+  const filteredRefuels = refuels.filter(refuel => refuel.car === car);
+
+  const liters = filteredRefuels.map(refuel => Number(refuel.liters));
+  const price = filteredRefuels.map(refuel => Number(refuel.price));
+  const distanceGas = filteredRefuels.map(refuel => Number(refuel.distance));
 
   const totalLiters = liters
     .filter(item => item > 0)
@@ -24,7 +26,7 @@ const TotalCost = ({ car }) => {
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
-  const averageGasPrice = Number(totalPrice) / Number(totalLiters)
+  const averageGasPrice = (Number(totalPrice) / Number(totalLiters)).toFixed(2);
 
   const averageExpensesGas = ((totalPrice / totalDistanceGas) * 100)
     .toFixed(2);
