@@ -5,9 +5,11 @@ import './TotalCost.css'
 const TotalCost = ({ car }) => {
   const { charges } = useContext(GlobalContext);
 
-  const kWh = charges.map(charges => Number(charges.kWh))
-  const priceElec = charges.map(charges => Number(charges.priceElec))
-  const distanceElec = charges.map(charges => Number(charges.distance))
+  const filteredCharges = charges.filter(charge => charge.car === car);
+
+  const kWh = filteredCharges.map(charges => Number(charges.kWh))
+  const priceElec = filteredCharges.map(charges => Number(charges.priceElec))
+  const distanceElec = filteredCharges.map(charges => Number(charges.distance))
 
   const totalElecCost = priceElec
     .filter(item => item > 0)
@@ -23,9 +25,13 @@ const TotalCost = ({ car }) => {
     .reduce((acc, item) => (acc += item), 0)
     .toFixed(2);
 
-  const averagElecCost = Number(totalElecCost) / priceElec.length
+  const averagElecCost = (Number(totalElecCost) / priceElec.length).toFixed(2);
   
-  const totalCostElec = Number(totalElecConsumption) * averagElecCost 
+  const totalCostElec = filteredCharges
+    .map(charge => Number(charge.priceElec) * Number(charge.kWh))
+    .filter(cost => cost > 0)
+    .reduce((acc, cost) => (acc += cost), 0)
+    .toFixed(2);
 
   const averageExpensesElec = ((totalCostElec / totalDistanceElec) * 100)
       .toFixed(2);
