@@ -34,7 +34,7 @@ const RefuelingHistory = () => {
           <tr>
             <th className='list__header'>Car</th>
             <th className='list__header'>kWh</th>
-            <th className='list__header'>Electricity Price (€)</th>
+            <th className='list__header'>Electricity Price (€/kWh)</th>
             <th className='list__header'>Distance (km)</th>
           </tr>
         </thead>
