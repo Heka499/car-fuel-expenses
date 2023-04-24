@@ -34,11 +34,11 @@ const RefuelingForm = () => {
         car
     }
 
-    {isElectric ? (
+    isElectric ? (
       addCharge(newCharge)
     ) : (
       addRefuel(newRefueling)
-    )}
+    )
     
     setCar('');
     setDistance('');
